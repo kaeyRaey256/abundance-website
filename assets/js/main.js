@@ -22,7 +22,6 @@ const S=[
 const TITLES={
   home:'Abundance Logistics Ltd. — East Africa\'s Premier Freight Partner',
   about:'About Us — Abundance Logistics Ltd.',
-  services:'Our Services — Abundance Logistics Ltd.',
   contact:'Contact Us — Abundance Logistics Ltd.',
   privacy:'Privacy Policy — Abundance Logistics Ltd.',
   disclaimer:'Disclaimer — Abundance Logistics Ltd.',
@@ -67,7 +66,7 @@ window.gp=function(id){
   if(pg){pg.classList.add('on');pg.classList.add('pg-enter');requestAnimationFrame(()=>requestAnimationFrame(()=>pg.classList.remove('pg-enter')))}
   window.scrollTo({top:0,behavior:'smooth'});
   document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('act'));
-  const m={home:0,about:1,services:2,contact:4};
+  const m={home:0,about:1,contact:3};
   const ls=document.querySelectorAll('.nav-link:not(.nc-toggle)');
   if(m[id]!==undefined&&ls[m[id]])ls[m[id]].classList.add('act');
   document.getElementById('nc').classList.remove('open');
@@ -84,7 +83,7 @@ try{
     document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
     document.getElementById('pg-'+saved).classList.add('on');
     if(TITLES[saved])document.title=TITLES[saved];
-    const m={home:0,about:1,services:2,contact:4};
+    const m={home:0,about:1,contact:3};
     const ls=document.querySelectorAll('.nav-link:not(.nc-toggle)');
     if(m[saved]!==undefined&&ls[m[saved]])ls[m[saved]].classList.add('act');
   }
