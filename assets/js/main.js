@@ -1,5 +1,5 @@
 /* ================================================================
-   ABUNDANCE LOGISTICS LTD. — main.js v10
+   ABUNDANCE LOGISTICS LTD. — main.js v14 (final)
    abundancelogistics.com
 ================================================================ */
 (function(){
@@ -20,11 +20,11 @@ const S=[
 
 /* ── PAGE TITLES ── */
 const TITLES={
-  home:'Abundance Logistics Ltd. — East Africa\'s Premier Freight Partner',
-  about:'About Us — Abundance Logistics Ltd.',
-  contact:'Contact Us — Abundance Logistics Ltd.',
-  privacy:'Privacy Policy — Abundance Logistics Ltd.',
-  disclaimer:'Disclaimer — Abundance Logistics Ltd.',
+  home:"Abundance Logistics Ltd. \u2014 East Africa's Premier Freight Partner",
+  about:'About Us \u2014 Abundance Logistics Ltd.',
+  contact:'Contact Us \u2014 Abundance Logistics Ltd.',
+  privacy:'Privacy Policy \u2014 Abundance Logistics Ltd.',
+  disclaimer:'Disclaimer \u2014 Abundance Logistics Ltd.',
 };
 
 /* ── SCROLL PROGRESS BAR ── */
@@ -37,84 +37,123 @@ window.addEventListener('scroll',()=>{
 },{passive:true});
 
 /* ── DOT-GRID CANVAS ── */
-function addDotGrid(secId,color,opacity,count,speed){
-  const sec=document.getElementById(secId);
+function addDotGrid(el,color,opacity,count,speed){
+  const sec=typeof el==='string'?document.getElementById(el):el;
   if(!sec)return;
   const canvas=document.createElement('canvas');
   canvas.style.cssText='position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1';
-  sec.style.position='relative';
+  if(getComputedStyle(sec).position==='static')sec.style.position='relative';
   sec.insertBefore(canvas,sec.firstChild);
   const ctx=canvas.getContext('2d');
   let W,H,dots=[];
-  const resize=()=>{W=canvas.width=canvas.offsetWidth;H=canvas.height=canvas.offsetHeight;dots=Array.from({length:count||40},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*2+1,vx:(Math.random()-.5)*(speed||.28),vy:(Math.random()-.5)*(speed||.28),op:Math.random()*.55+.15}))};
-  const draw=()=>{ctx.clearRect(0,0,W,H);dots.forEach(d=>{ctx.beginPath();ctx.arc(d.x,d.y,d.r,0,Math.PI*2);ctx.fillStyle=color||'rgba(255,255,255,0.3)';ctx.globalAlpha=d.op*opacity;ctx.fill();ctx.globalAlpha=1;d.x+=d.vx;d.y+=d.vy;if(d.x<0)d.x=W;if(d.x>W)d.x=0;if(d.y<0)d.y=H;if(d.y>H)d.y=0});requestAnimationFrame(draw)};
-  resize();draw();
-  window.addEventListener('resize',resize);
+  const resize=()=>{
+    W=canvas.width=sec.offsetWidth;
+    H=canvas.height=sec.offsetHeight;
+    dots=Array.from({length:count||40},()=>({
+      x:Math.random()*W,y:Math.random()*H,
+      r:Math.random()*1.8+0.6,
+      vx:(Math.random()-.5)*(speed||.22),
+      vy:(Math.random()-.5)*(speed||.22),
+      op:Math.random()*.5+.12
+    }));
+  };
+  let raf;
+  const draw=()=>{
+    ctx.clearRect(0,0,W,H);
+    dots.forEach(d=>{
+      ctx.beginPath();
+      ctx.arc(d.x,d.y,d.r,0,Math.PI*2);
+      ctx.fillStyle=color||'rgba(255,255,255,0.3)';
+      ctx.globalAlpha=d.op*opacity;
+      ctx.fill();
+      ctx.globalAlpha=1;
+      d.x+=d.vx; d.y+=d.vy;
+      if(d.x<0)d.x=W; if(d.x>W)d.x=0;
+      if(d.y<0)d.y=H; if(d.y>H)d.y=0;
+    });
+    raf=requestAnimationFrame(draw);
+  };
+  resize(); draw();
+  window.addEventListener('resize',()=>{resize();},{ passive:true });
 }
-addDotGrid('hero','rgba(255,255,255,1)',.15,50,.22);
-addDotGrid('svc-sec','rgba(2,31,56,1)',.1,38,.16);
-addDotGrid('team-sec','rgba(255,255,255,1)',.12,32,.18);
-addDotGrid('cta-sec','rgba(26,178,232,1)',.14,28,.20);
-addDotGrid('map-sec','rgba(26,178,232,1)',.1,22,.14);
+
+/* Section backgrounds */
+addDotGrid('hero','rgba(255,255,255,1)',.14,48,.20);
+addDotGrid('svc-sec','rgba(2,31,56,1)',.09,36,.14);
+addDotGrid('team-sec','rgba(255,255,255,1)',.12,30,.17);
+addDotGrid('cta-sec','rgba(26,178,232,1)',.13,26,.18);
+addDotGrid('map-sec','rgba(26,178,232,1)',.09,20,.12);
+
+/* Mobile drawer nav dot-grid — injected when drawer is first opened */
+let drawerGridAdded=false;
+function addDrawerDotGrid(){
+  if(drawerGridAdded)return;
+  const nav=document.getElementById('mob-drawer');
+  if(!nav)return;
+  addDotGrid(nav,'rgba(26,178,232,1)',.07,22,.14);
+  drawerGridAdded=true;
+}
 
 /* ── PAGE NAVIGATION ── */
 window.gp=function(id){
-  /* Page fade */
-  const all=document.querySelectorAll('.pg');
-  all.forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
   const pg=document.getElementById('pg-'+id);
-  if(pg){pg.classList.add('on');pg.classList.add('pg-enter');requestAnimationFrame(()=>requestAnimationFrame(()=>pg.classList.remove('pg-enter')))}
+  if(!pg){
+    /* Fallback — page doesn't exist, go home */
+    const home=document.getElementById('pg-home');
+    if(home)home.classList.add('on');
+    id='home';
+  } else {
+    pg.classList.add('on');
+  }
   window.scrollTo({top:0,behavior:'smooth'});
   document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('act'));
-  const m={home:0,about:1,contact:3};
+  const navMap={home:0,about:1,contact:3};
   const ls=document.querySelectorAll('.nav-link:not(.nc-toggle)');
-  if(m[id]!==undefined&&ls[m[id]])ls[m[id]].classList.add('act');
+  if(navMap[id]!==undefined&&ls[navMap[id]])ls[navMap[id]].classList.add('act');
   document.getElementById('nc').classList.remove('open');
   if(TITLES[id])document.title=TITLES[id];
-  try{localStorage.setItem('al_page',id)}catch(e){}
+  try{localStorage.setItem('al_page',id);}catch(e){}
   setTimeout(()=>initReveal(),80);
   resetCounters();
 };
 
-/* Restore on refresh */
-try{
-  const saved=localStorage.getItem('al_page');
-  if(saved&&document.getElementById('pg-'+saved)){
-    document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
-    document.getElementById('pg-'+saved).classList.add('on');
-    if(TITLES[saved])document.title=TITLES[saved];
-    const m={home:0,about:1,contact:3};
-    const ls=document.querySelectorAll('.nav-link:not(.nc-toggle)');
-    if(m[saved]!==undefined&&ls[m[saved]])ls[m[saved]].classList.add('act');
-  }
-}catch(e){}
-
-/* ── goServices — go home and scroll to services section ── */
-window.goServices = function(){
-  if(!document.getElementById('pg-home').classList.contains('on')){
-    gp('home');
-    setTimeout(()=>{
-      const el = document.getElementById('svc-sec');
-      if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
-    }, 200);
-  } else {
-    const el = document.getElementById('svc-sec');
-    if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
-  }
-};
+/* Restore page on refresh — with fallback to home if saved page is gone */
+(function restorePage(){
+  try{
+    const saved=localStorage.getItem('al_page');
+    if(saved){
+      const el=document.getElementById('pg-'+saved);
+      if(el){
+        document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
+        el.classList.add('on');
+        if(TITLES[saved])document.title=TITLES[saved];
+        const navMap={home:0,about:1,contact:3};
+        const ls=document.querySelectorAll('.nav-link:not(.nc-toggle)');
+        if(navMap[saved]!==undefined&&ls[navMap[saved]])ls[navMap[saved]].classList.add('act');
+      } else {
+        /* Saved page no longer exists — clear and show home */
+        localStorage.removeItem('al_page');
+      }
+    }
+  }catch(e){}
+})();
 
 /* ── SCROLL TO TEAM ── */
 window.scrollToTeam=function(){
-  if(!document.getElementById('pg-home').classList.contains('on')){
-    gp('home');
-    setTimeout(()=>{const el=document.getElementById('team-sec');if(el)el.scrollIntoView({behavior:'smooth',block:'start'})},220);
-  }else{
+  const goScroll=()=>{
     const el=document.getElementById('team-sec');
     if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
+  };
+  if(!document.getElementById('pg-home').classList.contains('on')){
+    gp('home');
+    setTimeout(goScroll,240);
+  } else {
+    goScroll();
   }
 };
 
-/* ── NAV ── */
+/* ── NAV SCROLL SHADOW ── */
 const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40),{passive:true});
 
@@ -122,8 +161,20 @@ window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40)
 const burger=document.getElementById('burger');
 const drawer=document.getElementById('mob-drawer');
 const drawerOverlay=document.getElementById('mob-overlay');
-function openDrawer(){burger.classList.add('open');drawer.classList.add('open');drawerOverlay.classList.add('open');document.body.style.overflow='hidden'}
-function closeDrawer(){burger.classList.remove('open');drawer.classList.remove('open');drawerOverlay.classList.remove('open');document.body.style.overflow=''}
+
+function openDrawer(){
+  addDrawerDotGrid();
+  burger.classList.add('open');
+  drawer.classList.add('open');
+  drawerOverlay.classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeDrawer(){
+  burger.classList.remove('open');
+  drawer.classList.remove('open');
+  drawerOverlay.classList.remove('open');
+  document.body.style.overflow='';
+}
 burger.addEventListener('click',()=>drawer.classList.contains('open')?closeDrawer():openDrawer());
 drawerOverlay.addEventListener('click',closeDrawer);
 window.cm=closeDrawer;
@@ -136,12 +187,19 @@ window.toggleMobCareers=function(e){
 };
 
 /* ── CAREERS DROPDOWN ── */
-window.toggleNC=function(e){e.stopPropagation();document.getElementById('nc').classList.toggle('open')};
+window.toggleNC=function(e){
+  e.stopPropagation();
+  document.getElementById('nc').classList.toggle('open');
+};
 document.addEventListener('click',()=>document.getElementById('nc').classList.remove('open'));
 
 /* ── SCROLL REVEAL ── */
 function initReveal(){
-  const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.1,rootMargin:'0px 0px -36px 0px'});
+  const io=new IntersectionObserver(es=>{
+    es.forEach(e=>{
+      if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}
+    });
+  },{threshold:.1,rootMargin:'0px 0px -36px 0px'});
   document.querySelectorAll('.sr:not(.in)').forEach(el=>io.observe(el));
 }
 window.initReveal=initReveal;
@@ -154,10 +212,15 @@ function resetCounters(){
   cObs=new IntersectionObserver(es=>{
     es.forEach(e=>{
       if(e.isIntersecting){
-        const el=e.target,t=+el.dataset.count,d=1800;
-        const s=performance.now();
-        const f=n=>{const p=Math.min((n-s)/d,1);const v=Math.round((1-Math.pow(1-p,4))*t);el.textContent=v+(p>=1?'+':'');if(p<1)requestAnimationFrame(f)};
-        requestAnimationFrame(f);
+        const el=e.target,t=+el.dataset.count,dur=1800;
+        const start=performance.now();
+        const tick=now=>{
+          const p=Math.min((now-start)/dur,1);
+          const v=Math.round((1-Math.pow(1-p,4))*t);
+          el.textContent=v+(p>=1?'+':'');
+          if(p<1)requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
         cObs.unobserve(el);
       }
     });
@@ -165,8 +228,11 @@ function resetCounters(){
   document.querySelectorAll('[data-count]').forEach(el=>cObs.observe(el));
 }
 
-/* ── SERVICE SCROLL ── */
-window.scrollSvc=function(d){const el=document.getElementById('svc-scroll');if(el)el.scrollBy({left:d*360,behavior:'smooth'})};
+/* ── SERVICE CARD SCROLL (desktop arrows) ── */
+window.scrollSvc=function(d){
+  const el=document.getElementById('svc-scroll');
+  if(el)el.scrollBy({left:d*360,behavior:'smooth'});
+};
 
 /* ── MOBILE SERVICE GRID ── */
 const mGrid=document.getElementById('svc-mobile-grid');
@@ -174,12 +240,11 @@ if(mGrid){
   mGrid.innerHTML=S.map((s,i)=>`
     <div class="svc-card-m" onclick="openSvc(${i})">
       <div class="svc-ico-m">
-        <img src="assets/images/services/${s.slug}.svg" alt="${s.t}" class="svc-icon-img"
-          onerror="this.style.opacity='.3'">
+        <img src="assets/images/services/${s.slug}.svg" alt="${s.t}" class="svc-icon-img" onerror="this.style.opacity='.3'">
       </div>
       <div class="svc-name-m">${s.t}</div>
-      <div class="svc-desc-m">${s.c.slice(0,72)}…</div>
-      <span class="svc-tap">Tap to explore →</span>
+      <div class="svc-desc-m">${s.c.slice(0,72)}\u2026</div>
+      <span class="svc-tap">Tap to explore \u2192</span>
     </div>`).join('');
 }
 
@@ -190,9 +255,9 @@ window.openSvc=function(i){
   document.getElementById('sm-num').textContent='Service '+s.n;
   document.getElementById('sm-title').textContent=s.t;
   document.getElementById('sm-content').textContent=s.c;
-  document.getElementById('sm-features').innerHTML=s.f.map(f=>`<div class="smfi"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span>${f}</span></div>`).join('');
-  const m=document.getElementById('svc-modal');
-  m.classList.add('open');
+  document.getElementById('sm-features').innerHTML=
+    s.f.map(f=>`<div class="smfi"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span>${f}</span></div>`).join('');
+  document.getElementById('svc-modal').classList.add('open');
   document.body.style.overflow='hidden';
 };
 window.closeSvc=function(){
@@ -208,7 +273,10 @@ window.openApply=function(role){
   document.body.style.overflow='hidden';
   document.getElementById('nc').classList.remove('open');
 };
-window.closeApply=function(){document.getElementById('amodal').classList.remove('open');document.body.style.overflow=''};
+window.closeApply=function(){
+  document.getElementById('amodal').classList.remove('open');
+  document.body.style.overflow='';
+};
 window.submitApply=function(e){
   if(e)e.preventDefault();
   const m=document.getElementById('amodal-msg');
@@ -221,7 +289,7 @@ window.submitContact=function(e){
   e.preventDefault();
   const m=document.getElementById('cf-msg');
   m.className='cf-msg ok';
-  m.textContent='Thank you — your message has been sent. We respond within one business day.';
+  m.textContent='Thank you \u2014 your message has been sent. We respond within one business day.';
   e.target.reset();
 };
 window.submitNL=function(e){
@@ -229,12 +297,15 @@ window.submitNL=function(e){
   const m=document.getElementById('nl-msg');
   m.className='nl-msg ok';
   m.textContent="Subscribed! You'll receive our next East Africa logistics update.";
-  const inp=document.getElementById('nl-email');if(inp)inp.value='';
+  const inp=document.getElementById('nl-email');
+  if(inp)inp.value='';
 };
 
 /* ── BACK TO TOP ── */
 const btt=document.createElement('button');
-btt.id='btt';btt.title='Back to top';
+btt.id='btt';
+btt.title='Back to top';
+btt.setAttribute('aria-label','Back to top');
 btt.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>';
 document.body.appendChild(btt);
 window.addEventListener('scroll',()=>btt.classList.toggle('visible',scrollY>420),{passive:true});
