@@ -287,7 +287,7 @@ a,button{text-decoration:none;color:inherit;cursor:pointer}
 .svc-card:hover .svc-ico{background:var(--navy)}
 /* Icon image — fill box, filter to sky then white */
 .svc-ico img.svc-icon-img{
-  width:56px;height:56px;
+  width:64px;height:64px;
   object-fit:contain;display:block;
   filter:brightness(0) saturate(100%) invert(57%) sepia(62%) saturate(469%) hue-rotate(162deg) brightness(97%) contrast(95%);
   transition:filter .3s;
@@ -311,7 +311,7 @@ a,button{text-decoration:none;color:inherit;cursor:pointer}
 .svc-card-m:hover::before{transform:scaleX(1)}
 .svc-ico-m{width:62px;height:62px;border-radius:14px;background:rgba(26,178,232,.1);display:flex;align-items:center;justify-content:center;transition:background .3s;flex-shrink:0}
 .svc-card-m:hover .svc-ico-m{background:var(--navy)}
-.svc-ico-m img.svc-icon-img{width:44px;height:44px;object-fit:contain;display:block;filter:brightness(0) saturate(100%) invert(57%) sepia(62%) saturate(469%) hue-rotate(162deg) brightness(97%) contrast(95%);transition:filter .3s}
+.svc-ico-m img.svc-icon-img{width:50px;height:50px;object-fit:contain;display:block;filter:brightness(0) saturate(100%) invert(57%) sepia(62%) saturate(469%) hue-rotate(162deg) brightness(97%) contrast(95%);transition:filter .3s}
 .svc-card-m:hover .svc-ico-m img.svc-icon-img{filter:brightness(0) invert(1)}
 .svc-name-m{font-family:'DM Sans',Arial,sans-serif;font-size:.88rem;font-weight:800;color:var(--navy);letter-spacing:-.01em}
 .svc-desc-m{font-family:'DM Sans',Arial,sans-serif;font-size:.74rem;font-weight:400;color:var(--tm);line-height:1.65;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
@@ -621,4 +621,282 @@ footer{background:var(--navy2);border-top:3px solid var(--sky);padding:72px 0 34
 }
 @media(min-width:769px) and (max-width:1100px){
   .svc-card{width:300px;height:400px}
+}
+
+/* ================================================================
+   v10.1 ADDITIONS — contact redesign, ticker sizes,
+   icon stroke animation, client logo sizes, micro-animation boost
+================================================================ */
+
+/* ── CONTACT GRID — proper responsive layout ── */
+.contact-grid{
+  max-width:1280px;margin:0 auto;
+  padding:80px 64px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:72px;
+  align-items:start;
+}
+.contact-map-wrap{
+  border-radius:14px;overflow:hidden;height:280px;
+  border:2px solid var(--bdr);
+  box-shadow:var(--sh);
+  margin-top:4px;
+}
+.contact-map-wrap iframe{width:100%;height:100%;border:none;display:block}
+
+/* Contact — tablet */
+@media(max-width:1100px){
+  .contact-grid{
+    grid-template-columns:1fr;
+    gap:0;
+    padding:0;
+  }
+  .contact-grid > .sr.fl{
+    padding:52px 40px 0;
+  }
+  .contact-map-wrap{
+    margin:28px 0 0;
+    border-radius:0;
+    border-left:none;border-right:none;
+    background:var(--sky3);
+    height:260px;
+    border-top:2px solid var(--bdr);
+    border-bottom:2px solid var(--bdr);
+    padding:18px 40px;
+    box-sizing:border-box;
+  }
+  .contact-map-wrap iframe{border-radius:12px;height:100%}
+  .contact-grid > .sr:last-child{
+    padding:44px 40px 60px;
+  }
+}
+/* Contact — phone */
+@media(max-width:768px){
+  .contact-grid{
+    grid-template-columns:1fr;
+    gap:0;
+    padding:0;
+  }
+  /* Contact info stacks cleanly */
+  .contact-grid > .sr.fl{
+    padding:36px 20px 0;
+    background:var(--white);
+  }
+  /* Map — full width, sky blue tinted bg, good height */
+  .contact-map-wrap{
+    margin:24px 0 0;
+    border-radius:0;
+    border-left:none;border-right:none;
+    background:rgba(26,178,232,.1);
+    height:220px;
+    border-top:2px solid var(--bdr);
+    border-bottom:2px solid var(--bdr);
+    padding:14px 20px;
+    box-sizing:border-box;
+  }
+  .contact-map-wrap iframe{border-radius:10px;height:100%}
+  /* Form section */
+  .contact-grid > .sr:last-child{
+    padding:32px 20px 48px;
+    background:var(--white);
+  }
+}
+
+/* ── TICKER — home ticker: bold and prominent ── */
+.ticker{
+  padding:22px 0;
+}
+.t-item{
+  font-size:.96rem;
+  padding:0 40px;
+  gap:14px;
+  letter-spacing:.2em;
+  font-weight:700;
+}
+/* Secondary ticker — about/contact pages */
+.ticker-sm{padding:15px 0}
+.ticker-sm .t-item{
+  font-size:.78rem;
+  padding:0 28px;
+  color:rgba(26,178,232,.55);
+  letter-spacing:.16em;
+  font-weight:600;
+}
+
+/* ── CLIENT LOGOS — much bigger images ── */
+.cl-logo.cl-logo-img{
+  height:84px;
+  min-width:150px;
+  padding:4px 8px;
+  overflow:visible; /* allow image to extend beyond container */
+}
+.cl-logo.cl-logo-img img{
+  width:auto;
+  height:100%;
+  max-width:160px;
+  object-fit:contain;
+  display:block;
+  margin:0 auto;
+  filter:grayscale(10%) contrast(1.1);
+  transition:filter .25s,transform .25s;
+  transform:scale(1.55);
+  transform-origin:center center;
+}
+.cl-logo.cl-logo-img:hover img{
+  filter:none;
+  transform:scale(1.65);
+}
+
+/* ── SERVICE ICON — animated stroke orbit ── */
+/* Each icon gets a subtle animated ring in resting state */
+@keyframes orbitStroke{
+  0%{stroke-dashoffset:0;opacity:.55}
+  50%{opacity:.8}
+  100%{stroke-dashoffset:-251;opacity:.55}
+}
+@keyframes orbitStroke2{
+  0%{stroke-dashoffset:-80;opacity:.35}
+  50%{opacity:.65}
+  100%{stroke-dashoffset:-331;opacity:.35}
+}
+@keyframes orbitStroke3{
+  0%{stroke-dashoffset:-160;opacity:.25}
+  50%{opacity:.5}
+  100%{stroke-dashoffset:-411;opacity:.25}
+}
+
+/* Inject SVG ring overlay into .svc-ico via ::after — but we use the
+   JS approach instead (injects a small SVG ring into each icon box) */
+/* CSS ring on icon box border — subtle rotating dashed border */
+.svc-ico::after{
+  content:'';
+  position:absolute;
+  inset:-3px;
+  border-radius:20px;
+  border:2px dashed transparent;
+  background:transparent;
+  pointer-events:none;
+  transition:border-color .3s;
+}
+/* Staggered animated rings via nth-child — uses outline animation */
+.svc-card:nth-child(1) .svc-ico{animation:svcRingPulse 4s ease-in-out infinite 0s}
+.svc-card:nth-child(2) .svc-ico{animation:svcRingPulse 4s ease-in-out infinite .6s}
+.svc-card:nth-child(3) .svc-ico{animation:svcRingPulse 4s ease-in-out infinite 1.2s}
+.svc-card:nth-child(4) .svc-ico{animation:svcRingPulse 4s ease-in-out infinite 1.8s}
+.svc-card:nth-child(5) .svc-ico{animation:svcRingPulse 4s ease-in-out infinite 2.4s}
+.svc-card:nth-child(6) .svc-ico{animation:svcRingPulse 4s ease-in-out infinite 3s}
+.svc-card:nth-child(7) .svc-ico{animation:svcRingPulse 4s ease-in-out infinite 0.3s}
+.svc-card:nth-child(8) .svc-ico{animation:svcRingPulse 4s ease-in-out infinite 0.9s}
+.svc-card:nth-child(9) .svc-ico{animation:svcRingPulse 4s ease-in-out infinite 1.5s}
+/* Same for services page grid */
+.svc-page-grid .svc-card:nth-child(1) .svc-ico{animation:svcRingPulse 4s ease-in-out infinite 0s}
+.svc-page-grid .svc-card:nth-child(2) .svc-ico{animation:svcRingPulse 4s ease-in-out infinite .5s}
+.svc-page-grid .svc-card:nth-child(3) .svc-ico{animation:svcRingPulse 4s ease-in-out infinite 1s}
+.svc-page-grid .svc-card:nth-child(4) .svc-ico{animation:svcRingPulse 4s ease-in-out infinite 1.5s}
+.svc-page-grid .svc-card:nth-child(5) .svc-ico{animation:svcRingPulse 4s ease-in-out infinite 2s}
+.svc-page-grid .svc-card:nth-child(6) .svc-ico{animation:svcRingPulse 4s ease-in-out infinite 2.5s}
+.svc-page-grid .svc-card:nth-child(7) .svc-ico{animation:svcRingPulse 4s ease-in-out infinite .2s}
+.svc-page-grid .svc-card:nth-child(8) .svc-ico{animation:svcRingPulse 4s ease-in-out infinite .7s}
+.svc-page-grid .svc-card:nth-child(9) .svc-ico{animation:svcRingPulse 4s ease-in-out infinite 1.2s}
+
+@keyframes svcRingPulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(2,31,56,0),0 0 0 0 rgba(26,178,232,0);outline:2px solid transparent}
+  25%{box-shadow:0 0 0 4px rgba(2,31,56,.18),0 0 0 8px rgba(26,178,232,.1);outline:2px solid rgba(2,31,56,.08)}
+  55%{box-shadow:0 0 0 6px rgba(2,31,56,.1),0 0 0 12px rgba(26,178,232,.06);outline:2px solid rgba(2,31,56,.05)}
+  80%{box-shadow:0 0 0 3px rgba(2,31,56,.12),0 0 0 6px rgba(26,178,232,.07);outline:2px solid transparent}
+}
+/* Stop ring on hover — hover has its own navy background effect */
+.svc-card:hover .svc-ico{animation:none}
+
+/* ── MICRO ANIMATIONS — more visible, still premium ── */
+
+/* Strong button shimmer */
+.btn::before{
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.42),rgba(255,255,255,.2),transparent);
+}
+
+/* Nav active underline — gold and visible */
+.nav-link.act::after{transform:scaleX(1);opacity:1}
+.nav-link::after{background:var(--grad90);height:3px;border-radius:2px}
+.nav-link:hover{background:rgba(26,178,232,.1)}
+
+/* Stronger hero eyebrow badge */
+.hero-eyebrow{
+  background:rgba(2,31,56,.14);
+  border:1.5px solid rgba(2,31,56,.22);
+}
+
+/* Stat card hover — more visible lift */
+.hs-card:hover{background:rgba(255,255,255,.28)}
+.hs-card:hover::before{transform:scaleY(1);width:5px}
+
+/* Team card hover — cleaner lift */
+.team-card:hover{transform:translateY(-11px);box-shadow:0 26px 60px rgba(2,31,56,.22)}
+
+/* Section heading underline on reveal */
+.sec-h::after{
+  content:'';
+  display:block;
+  width:0;height:3px;
+  background:var(--grad90);
+  border-radius:2px;
+  margin-top:10px;
+  transition:width .8s var(--ease);
+}
+.sr.in .sec-h::after{width:52px}
+
+/* About value cells — more visible hover */
+.av-cell:hover{
+  border-left-color:var(--sky);
+  background:var(--off2);
+  transform:translateX(7px);
+  box-shadow:4px 0 12px rgba(26,178,232,.1);
+}
+
+/* Footer links hover */
+.fc-link:hover{color:var(--sky);transform:translateX(3px)}
+.fc-link{transition:color .2s,transform .18s}
+
+/* Scroll-reveal items — punchy, visible entry */
+.sr{
+  opacity:0;
+  transform:translateY(36px);
+  transition:opacity .65s var(--ease),transform .65s var(--ease);
+}
+.sr.fl{transform:translateX(-36px)}
+.sr.fr{transform:translateX(36px)}
+.sr.in{opacity:1;transform:none}
+
+/* Client logo container hover — lift + glow */
+.cl-logo:hover{
+  background:rgba(26,178,232,.08);
+  border-color:var(--sky);
+  transform:translateY(-5px);
+  box-shadow:0 8px 24px rgba(26,178,232,.22);
+}
+
+/* Testimonial card — stronger shimmer */
+.tc-card::after{
+  background:linear-gradient(130deg,rgba(26,178,232,.1),transparent 55%);
+}
+.tc-card:hover::after{opacity:1}
+
+/* Map stat boxes — stronger lift */
+.ms:hover{
+  background:rgba(26,178,232,.22);
+  border-color:rgba(26,178,232,.45);
+  transform:translateY(-6px);
+  box-shadow:0 12px 32px rgba(26,178,232,.18);
+}
+
+/* Back to top — more visible */
+#btt{
+  border-width:3px;
+  box-shadow:0 6px 24px rgba(2,31,56,.35);
+}
+
+/* ── MOBILE TICKER SIZING ── */
+@media(max-width:768px){
+  .t-item{font-size:.8rem;padding:0 26px}
 }
