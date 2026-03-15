@@ -614,7 +614,7 @@ footer{background:var(--navy2);border-top:3px solid var(--sky);padding:72px 0 34
   .team-inner{padding-left:20px;padding-right:20px}
   .testi-inner{padding-left:20px;padding-right:20px}
   .cta-inner{padding-left:20px;padding-right:20px}
-  .contact-grid{padding:56px 20px!important}
+  .contact-grid{padding:56px 20px}
   .pg-about-grid{grid-template-columns:1fr!important;gap:28px!important}
   .pg-about-img-first{order:2}
   .pg-about-txt-first{order:1}
@@ -627,81 +627,6 @@ footer{background:var(--navy2);border-top:3px solid var(--sky);padding:72px 0 34
    v10.1 ADDITIONS — contact redesign, ticker sizes,
    icon stroke animation, client logo sizes, micro-animation boost
 ================================================================ */
-
-/* ── CONTACT GRID — proper responsive layout ── */
-.contact-grid{
-  max-width:1280px;margin:0 auto;
-  padding:80px 64px;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:72px;
-  align-items:start;
-}
-.contact-map-wrap{
-  border-radius:14px;overflow:hidden;height:280px;
-  border:2px solid var(--bdr);
-  box-shadow:var(--sh);
-  margin-top:4px;
-}
-.contact-map-wrap iframe{width:100%;height:100%;border:none;display:block}
-
-/* Contact — tablet */
-@media(max-width:1100px){
-  .contact-grid{
-    grid-template-columns:1fr;
-    gap:0;
-    padding:0;
-  }
-  .contact-grid > .sr.fl{
-    padding:52px 40px 0;
-  }
-  .contact-map-wrap{
-    margin:28px 0 0;
-    border-radius:0;
-    border-left:none;border-right:none;
-    background:var(--sky3);
-    height:260px;
-    border-top:2px solid var(--bdr);
-    border-bottom:2px solid var(--bdr);
-    padding:18px 40px;
-    box-sizing:border-box;
-  }
-  .contact-map-wrap iframe{border-radius:12px;height:100%}
-  .contact-grid > .sr:last-child{
-    padding:44px 40px 60px;
-  }
-}
-/* Contact — phone */
-@media(max-width:768px){
-  .contact-grid{
-    grid-template-columns:1fr;
-    gap:0;
-    padding:0;
-  }
-  /* Contact info stacks cleanly */
-  .contact-grid > .sr.fl{
-    padding:36px 20px 0;
-    background:var(--white);
-  }
-  /* Map — full width, sky blue tinted bg, good height */
-  .contact-map-wrap{
-    margin:24px 0 0;
-    border-radius:0;
-    border-left:none;border-right:none;
-    background:rgba(26,178,232,.1);
-    height:220px;
-    border-top:2px solid var(--bdr);
-    border-bottom:2px solid var(--bdr);
-    padding:14px 20px;
-    box-sizing:border-box;
-  }
-  .contact-map-wrap iframe{border-radius:10px;height:100%}
-  /* Form section */
-  .contact-grid > .sr:last-child{
-    padding:32px 20px 48px;
-    background:var(--white);
-  }
-}
 
 /* ── TICKER — home ticker: bold and prominent ── */
 .ticker{
@@ -899,4 +824,227 @@ footer{background:var(--navy2);border-top:3px solid var(--sky);padding:72px 0 34
 /* ── MOBILE TICKER SIZING ── */
 @media(max-width:768px){
   .t-item{font-size:.8rem;padding:0 26px}
+}
+
+/* ================================================================
+   v10.1 ADDITIONS
+================================================================ */
+
+/* ── goServices function in JS — nav scrolls to home svc section ── */
+
+/* ── ICON ANIMATED STROKE — navy ring orbits icon at rest ── */
+@keyframes icoRing{
+  0%{stroke-dashoffset:220;opacity:0}
+  15%{opacity:.7}
+  85%{opacity:.7}
+  100%{stroke-dashoffset:0;opacity:0}
+}
+/* Each card gets a different animation delay so they stagger */
+.svc-ico::after{
+  content:'';
+  position:absolute;inset:-4px;
+  border-radius:22px;
+  border:2px solid var(--navy);
+  opacity:0;
+  stroke-dasharray:220;
+  stroke-dashoffset:220;
+  /* CSS border can't use stroke-dasharray — use outline trick instead */
+}
+/* Use SVG overlay injected via CSS pseudo — can't do dasharray on border
+   So use box-shadow pulse approach instead */
+.svc-ico{
+  box-shadow: 0 0 0 0 rgba(2,31,56,0);
+}
+/* Staggered navy ring animation on each card */
+.svc-card:nth-child(1) .svc-ico{animation:icoRingPulse 5s 0s infinite}
+.svc-card:nth-child(2) .svc-ico{animation:icoRingPulse 5s .6s infinite}
+.svc-card:nth-child(3) .svc-ico{animation:icoRingPulse 5s 1.2s infinite}
+.svc-card:nth-child(4) .svc-ico{animation:icoRingPulse 5s 1.8s infinite}
+.svc-card:nth-child(5) .svc-ico{animation:icoRingPulse 5s 2.4s infinite}
+.svc-card:nth-child(6) .svc-ico{animation:icoRingPulse 5s 3.0s infinite}
+.svc-card:nth-child(7) .svc-ico{animation:icoRingPulse 5s 3.6s infinite}
+.svc-card:nth-child(8) .svc-ico{animation:icoRingPulse 5s 4.2s infinite}
+.svc-card:nth-child(9) .svc-ico{animation:icoRingPulse 5s 4.8s infinite}
+/* Stop the ring animation on hover (replaced by wiggle) */
+.svc-card:hover .svc-ico{animation:icoWiggle .45s var(--ease) forwards!important;box-shadow:none}
+
+@keyframes icoRingPulse{
+  0%,30%{box-shadow:0 0 0 0 rgba(2,31,56,0)}
+  40%{box-shadow:0 0 0 3px rgba(2,31,56,.18)}
+  55%{box-shadow:0 0 0 6px rgba(2,31,56,.1),0 0 0 3px rgba(2,31,56,.18)}
+  70%{box-shadow:0 0 0 10px rgba(2,31,56,.04),0 0 0 6px rgba(2,31,56,.08)}
+  85%,100%{box-shadow:0 0 0 0 rgba(2,31,56,0)}
+}
+/* Same for mobile cards */
+.svc-card-m .svc-ico-m{animation:icoRingPulseSm 5s 0s infinite}
+.svc-card-m:nth-child(2) .svc-ico-m{animation:icoRingPulseSm 5s .7s infinite}
+.svc-card-m:nth-child(3) .svc-ico-m{animation:icoRingPulseSm 5s 1.4s infinite}
+.svc-card-m:nth-child(4) .svc-ico-m{animation:icoRingPulseSm 5s 2.1s infinite}
+.svc-card-m:nth-child(5) .svc-ico-m{animation:icoRingPulseSm 5s 2.8s infinite}
+.svc-card-m:nth-child(6) .svc-ico-m{animation:icoRingPulseSm 5s 3.5s infinite}
+.svc-card-m:hover .svc-ico-m{animation:none!important}
+@keyframes icoRingPulseSm{
+  0%,30%{box-shadow:0 0 0 0 rgba(2,31,56,0)}
+  45%{box-shadow:0 0 0 3px rgba(2,31,56,.2)}
+  65%{box-shadow:0 0 0 7px rgba(2,31,56,.06)}
+  85%,100%{box-shadow:0 0 0 0 rgba(2,31,56,0)}
+}
+
+/* ── CLIENT LOGOS — much bigger images, same container ── */
+/* Container keeps size but scale the image inside to 150% */
+.cl-logo.cl-logo-img{
+  overflow:visible;
+  padding:4px 10px;
+}
+.cl-logo.cl-logo-img img{
+  width:auto;
+  height:150%;       /* 150% of container height */
+  max-width:160px;
+  min-height:60px;
+  object-fit:contain;
+  display:block;
+  margin:0 auto;
+  filter:grayscale(10%) contrast(1.08);
+  transition:filter .25s, transform .2s;
+}
+.cl-logo.cl-logo-img:hover img{
+  filter:none;
+  transform:scale(1.06);
+}
+
+/* ── STRONGER MICRO-ANIMATIONS ── */
+/* Section labels slide-grow underline */
+.sec-label::before{
+  animation:lineGrow .6s var(--ease) both;
+}
+.sr.in .sec-label::before{
+  animation:lineGrow .6s var(--ease) .1s both;
+}
+/* Stronger hover lift on cards */
+.team-card:hover{
+  transform:translateY(-12px);
+  box-shadow:0 28px 64px rgba(2,31,56,.22);
+}
+.tc-card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 18px 44px rgba(26,178,232,.22);
+}
+.ms:hover{
+  transform:translateY(-7px);
+  box-shadow:0 16px 40px rgba(26,178,232,.2);
+}
+/* Nav link stronger underline */
+.nav-link::after{
+  height:3px;
+}
+/* Stat number glow on reveal */
+.hs-card.in .hs-num,
+.ms.in .ms-n{
+  animation:numGlow .8s var(--ease) .3s both;
+}
+@keyframes numGlow{
+  0%{filter:brightness(1)}
+  50%{filter:brightness(1.4) drop-shadow(0 0 8px rgba(26,178,232,.5))}
+  100%{filter:brightness(1)}
+}
+/* Stronger button hover */
+.btn:hover{
+  transform:translateY(-3px)!important;
+}
+/* CTA band heading shimmer on load */
+.cta-h{
+  position:relative;
+}
+/* Scroll reveal stronger */
+.sr{
+  opacity:0;transform:translateY(32px);
+  transition:opacity .9s var(--ease),transform .9s var(--ease);
+}
+.sr.fl{transform:translateX(-32px)}
+.sr.fr{transform:translateX(32px)}
+
+/* ── CONTACT PAGE REDESIGN ── */
+/* Info pills strip — horizontal row, wraps on mobile */
+.contact-info-strip{
+  background:var(--navy);
+  padding:32px 64px;
+  display:flex;align-items:stretch;
+  flex-wrap:wrap;gap:3px;
+}
+.ci-pill{
+  flex:1;min-width:200px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(26,178,232,.15);
+  border-radius:12px;padding:18px 20px;
+  display:flex;align-items:flex-start;gap:14px;
+  transition:background .2s,border-color .2s;
+  text-decoration:none;color:inherit;
+  cursor:default;
+}
+a.ci-pill{cursor:pointer}
+.ci-pill:hover{background:rgba(26,178,232,.1);border-color:rgba(26,178,232,.35)}
+.ci-ico{
+  width:34px;height:34px;border-radius:8px;
+  background:rgba(26,178,232,.15);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  color:var(--sky);
+}
+.ci-ico svg{width:16px;height:16px;flex-shrink:0}
+.ci-lbl{font-family:'DM Sans',Arial,sans-serif;font-size:.6rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.32);margin-bottom:4px}
+.ci-val{font-family:'DM Sans',Arial,sans-serif;font-size:.86rem;font-weight:600;color:var(--white);line-height:1.5}
+
+/* Main contact grid */
+.contact-main-grid{
+  max-width:1280px;margin:0 auto;
+  padding:72px 64px;
+  display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;
+}
+/* Map column */
+.contact-map-col{display:flex;flex-direction:column;gap:12px}
+.contact-map-wrap{
+  height:420px;border-radius:16px;overflow:hidden;
+  border:2px solid var(--bdr);
+  box-shadow:var(--sh);
+}
+.contact-map-caption{
+  display:flex;align-items:center;gap:9px;
+  background:var(--sky3);border-radius:9px;padding:13px 16px;
+}
+.contact-map-caption svg{width:16px;height:16px;flex-shrink:0}
+.contact-map-caption span{font-family:'DM Sans',Arial,sans-serif;font-size:.82rem;font-weight:500;color:var(--tb);line-height:1.5}
+/* Form column */
+.contact-form-col .sec-h{margin:12px 0 10px}
+.contact-form-sub{font-family:'DM Sans',Arial,sans-serif;font-size:.92rem;font-weight:400;color:var(--tb);margin-bottom:22px;line-height:1.75}
+
+/* Mobile contact — full width stacked, map on light blue */
+@media(max-width:768px){
+  .contact-info-strip{padding:20px;flex-direction:column;gap:8px}
+  .ci-pill{min-width:unset;flex:none;width:100%}
+  .contact-main-grid{
+    grid-template-columns:1fr;
+    gap:0;
+    padding:0;
+  }
+  .contact-map-col{
+    background:var(--sky3);
+    padding:24px 20px 28px;
+    border-radius:0;
+    gap:14px;
+  }
+  .contact-map-wrap{height:260px;border:none;border-radius:12px}
+  .contact-form-col{
+    padding:32px 20px 48px;
+    background:var(--white);
+  }
+  .contact-map-caption{background:rgba(26,178,232,.12)}
+}
+@media(max-width:1100px){
+  .contact-info-strip{padding:24px 40px}
+  .contact-main-grid{padding:56px 40px;gap:44px}
+}
+
+/* ── CONTACT PAGE on tablet — single column ── */
+@media(max-width:1100px){
+  .contact-main-grid{grid-template-columns:1fr}
+  .contact-map-wrap{height:340px}
 }
