@@ -89,6 +89,20 @@ try{
   }
 }catch(e){}
 
+/* ── goServices — go home and scroll to services section ── */
+window.goServices = function(){
+  if(!document.getElementById('pg-home').classList.contains('on')){
+    gp('home');
+    setTimeout(()=>{
+      const el = document.getElementById('svc-sec');
+      if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+    }, 200);
+  } else {
+    const el = document.getElementById('svc-sec');
+    if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+};
+
 /* ── SCROLL TO TEAM ── */
 window.scrollToTeam=function(){
   if(!document.getElementById('pg-home').classList.contains('on')){
