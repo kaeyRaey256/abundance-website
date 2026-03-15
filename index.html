@@ -85,7 +85,7 @@
     <ul class="nav-links">
       <li><span class="nav-link act" onclick="gp('home')">Home</span></li>
       <li><span class="nav-link" onclick="gp('about')">About</span></li>
-      <li><span class="nav-link" onclick="gp('services')">Services</span></li>
+      <li><span class="nav-link" onclick="gp('home');setTimeout(()=>document.getElementById('svc-sec').scrollIntoView({behavior:'smooth'}),120)">Services</span></li>
       <li><span class="nav-link" onclick="gp('home');scrollToTeam()">Team</span></li>
       <li class="nav-careers" id="nc">
         <span class="nav-link nc-toggle" onclick="toggleNC(event)">Careers<svg class="nc-arrow" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
@@ -126,7 +126,7 @@
       <div class="mob-link-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
       About Us
     </span>
-    <span class="mob-link" onclick="gp('services');cm()">
+    <span class="mob-link" onclick="gp('home');setTimeout(()=>{document.getElementById('svc-sec').scrollIntoView({behavior:'smooth'})},120);cm()">
       <div class="mob-link-ico"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg></div>
       Services
     </span>
@@ -233,7 +233,7 @@
   <div class="svc-scroll" id="svc-scroll">
     <div class="svc-row" id="svc-row">
       <!-- Cards injected below, but also hardcoded for no-JS -->
-      <div class="svc-card sr d1" onclick="openSvc(0)"><div class="svc-card-body"><div class="svc-num">01</div><div class="svc-ico"><img src="assets/images/services/transportation.svg" alt="" class="svc-icon-img"></div><div class="svc-name">Transportation</div><div class="svc-desc">FCL, LCL, Flatbed, Intermodal and Specialty freight — domestic and international, across all major global markets.</div><div class="svc-cta">Click to Explore →</div></div></div>
+      <div class="svc-card sr d1" onclick="gp('home');setTimeout(()=>{document.getElementById('svc-sec').scrollIntoView({behavior:'smooth'});setTimeout(()=>openSvc(0),400)},120)"><div class="svc-card-body"><div class="svc-num">01</div><div class="svc-ico"><img src="assets/images/services/transportation.svg" alt="" class="svc-icon-img"></div><div class="svc-name">Transportation</div><div class="svc-desc">FCL, LCL, Flatbed, Intermodal and Specialty freight — domestic and international, across all major global markets.</div><div class="svc-cta">Click to Explore →</div></div></div>
       <div class="svc-card sr d2" onclick="openSvc(1)"><div class="svc-card-body"><div class="svc-num">02</div><div class="svc-ico"><img src="assets/images/services/ware-housing.svg" alt="" class="svc-icon-img"></div><div class="svc-name">Ware Housing</div><div class="svc-desc">State-of-the-art Kampala facility with advanced inventory management for short and long-term storage needs.</div><div class="svc-cta">Click to Explore →</div></div></div>
       <div class="svc-card sr d3" onclick="openSvc(2)"><div class="svc-card-body"><div class="svc-num">03</div><div class="svc-ico"><img src="assets/images/services/3pl.svg" alt="" class="svc-icon-img"></div><div class="svc-name">3PL</div><div class="svc-desc">Third-party logistics to optimize your entire supply chain — from inventory management to order fulfillment.</div><div class="svc-cta">Click to Explore →</div></div></div>
       <div class="svc-card sr d1" onclick="openSvc(3)"><div class="svc-card-body"><div class="svc-num">04</div><div class="svc-ico"><img src="assets/images/services/air-freight.svg" alt="" class="svc-icon-img"></div><div class="svc-name">Air Freight</div><div class="svc-desc">Top-tier airfreight for all cargo sizes via our global partner network with advanced tracking technology.</div><div class="svc-cta">Click to Explore →</div></div></div>
@@ -319,20 +319,20 @@
           <line x1="15" y1="80" x2="132" y2="68" stroke="rgba(26,178,232,.18)" stroke-width="1" stroke-dasharray="6 4"><animate attributeName="stroke-dashoffset" values="0;-40" dur="7s" begin=".5s" repeatCount="indefinite"/></line>
           <line x1="12" y1="120" x2="130" y2="92" stroke="rgba(26,178,232,.18)" stroke-width="1" stroke-dasharray="6 4"><animate attributeName="stroke-dashoffset" values="0;-40" dur="8s" begin="1s" repeatCount="indefinite"/></line>
           <line x1="38" y1="155" x2="118" y2="108" stroke="rgba(26,178,232,.15)" stroke-width="1" stroke-dasharray="6 4"><animate attributeName="stroke-dashoffset" values="0;-40" dur="7s" begin="1.5s" repeatCount="indefinite"/></line>
-          <line x1="75" y1="163" x2="92" y2="90" stroke="rgba(26,178,232,.2)" stroke-width="1" stroke-dasharray="5 4"><animate attributeName="stroke-dashoffset" values="0;-36" dur="5.5s" begin=".3s" repeatCount="indefinite"/></line>
+          <line x1="75" y1="163" x2="112" y2="106" stroke="rgba(26,178,232,.2)" stroke-width="1" stroke-dasharray="5 4"><animate attributeName="stroke-dashoffset" values="0;-36" dur="5.5s" begin=".3s" repeatCount="indefinite"/></line>
           <line x1="27" y1="30" x2="75" y2="163" stroke="rgba(26,178,232,.14)" stroke-width="1" stroke-dasharray="7 5"><animate attributeName="stroke-dashoffset" values="0;-48" dur="9s" begin=".8s" repeatCount="indefinite"/></line>
           <line x1="128" y1="26" x2="104" y2="128" stroke="rgba(26,178,232,.16)" stroke-width="1" stroke-dasharray="6 4"><animate attributeName="stroke-dashoffset" values="0;-40" dur="7.5s" begin="1.2s" repeatCount="indefinite"/></line>
-          <line x1="8" y1="66" x2="92" y2="90" stroke="rgba(26,178,232,.2)" stroke-width="1.2" stroke-dasharray="5 4"><animate attributeName="stroke-dashoffset" values="0;-36" dur="5s" begin=".2s" repeatCount="indefinite"/></line>
-          <line x1="92" y1="90" x2="128" y2="26" stroke="rgba(26,178,232,.18)" stroke-width="1" stroke-dasharray="5 4"><animate attributeName="stroke-dashoffset" values="0;-36" dur="6s" begin=".6s" repeatCount="indefinite"/></line>
-          <line x1="92" y1="90" x2="104" y2="128" stroke="rgba(26,178,232,.22)" stroke-width="1.2" stroke-dasharray="5 4"><animate attributeName="stroke-dashoffset" values="0;-36" dur="5s" begin=".4s" repeatCount="indefinite"/></line>
+          <line x1="8" y1="66" x2="112" y2="106" stroke="rgba(26,178,232,.2)" stroke-width="1.2" stroke-dasharray="5 4"><animate attributeName="stroke-dashoffset" values="0;-36" dur="5s" begin=".2s" repeatCount="indefinite"/></line>
+          <line x1="112" y1="106" x2="128" y2="26" stroke="rgba(26,178,232,.18)" stroke-width="1" stroke-dasharray="5 4"><animate attributeName="stroke-dashoffset" values="0;-36" dur="6s" begin=".6s" repeatCount="indefinite"/></line>
+          <line x1="112" y1="106" x2="104" y2="128" stroke="rgba(26,178,232,.22)" stroke-width="1.2" stroke-dasharray="5 4"><animate attributeName="stroke-dashoffset" values="0;-36" dur="5s" begin=".4s" repeatCount="indefinite"/></line>
 
-          <!-- KAMPALA HQ — gold pulsing dot -->
-          <circle cx="92" cy="90" r="7" fill="url(#gg)" filter="url(#gf1)"/>
-          <circle cx="92" cy="90" r="12" fill="none" stroke="url(#gg)" stroke-width="1.2">
+          <!-- KAMPALA HQ — gold pulsing dot (correct Uganda position) -->
+          <circle cx="112" cy="106" r="7" fill="url(#gg)" filter="url(#gf1)"/>
+          <circle cx="112" cy="106" r="12" fill="none" stroke="url(#gg)" stroke-width="1.2">
             <animate attributeName="r" values="10;26;10" dur="2.8s" repeatCount="indefinite"/>
             <animate attributeName="opacity" values="0.8;0;0.8" dur="2.8s" repeatCount="indefinite"/>
           </circle>
-          <circle cx="92" cy="90" r="20" fill="none" stroke="rgba(245,200,66,.2)" stroke-width=".8">
+          <circle cx="112" cy="106" r="20" fill="none" stroke="rgba(245,200,66,.2)" stroke-width=".8">
             <animate attributeName="r" values="18;36;18" dur="2.8s" begin=".6s" repeatCount="indefinite"/>
             <animate attributeName="opacity" values="0.5;0;0.5" dur="2.8s" begin=".6s" repeatCount="indefinite"/>
           </circle>
@@ -344,7 +344,7 @@
           <path d="M 128,26 C 148,16 168,8 192,4" stroke="rgba(26,178,232,.2)" stroke-width="1" stroke-dasharray="7 5" fill="none"><animate attributeName="stroke-dashoffset" values="0;-48" dur="5.5s" begin=".4s" repeatCount="indefinite"/></path>
 
           <!-- Small network dots at key junctions -->
-          <circle cx="92" cy="90" r="0"><animate attributeName="r" values="0;3;0" dur="3s" repeatCount="indefinite"/></circle>
+          <circle cx="112" cy="106" r="0"><animate attributeName="r" values="0;4;0" dur="3s" repeatCount="indefinite"/></circle>
           <circle cx="27" cy="30" r="2.5" fill="rgba(26,178,232,.5)"><animate attributeName="opacity" values=".5;1;.5" dur="2.5s" repeatCount="indefinite"/></circle>
           <circle cx="128" cy="26" r="2.5" fill="rgba(26,178,232,.5)"><animate attributeName="opacity" values=".5;1;.5" dur="3s" begin=".4s" repeatCount="indefinite"/></circle>
           <circle cx="75" cy="163" r="2.5" fill="rgba(26,178,232,.5)"><animate attributeName="opacity" values=".5;1;.5" dur="2.8s" begin=".8s" repeatCount="indefinite"/></circle>
@@ -540,6 +540,13 @@
 ================================================================ -->
 <div class="pg" id="pg-about">
   <div class="pg-hero"><div class="pg-hero-inner"><div class="sec-label" style="color:rgba(2,31,56,.6)">Who We Are</div><h1 class="pg-h">About Abundance<br>Logistics Ltd.</h1><p class="pg-sub">Established in 2008 by Mr. Brian Muliika — dedicated to top-tier logistics across East Africa for over a decade.</p></div></div>
+  <div class="ticker ticker-sm">
+    <div class="t-track">
+      <span class="t-item">Transportation <span class="t-dot"></span></span><span class="t-item">Ware Housing <span class="t-dot"></span></span><span class="t-item">3PL <span class="t-dot"></span></span><span class="t-item">Air Freight <span class="t-dot"></span></span><span class="t-item">Sea Freight <span class="t-dot"></span></span><span class="t-item">Freight Forwarding <span class="t-dot"></span></span><span class="t-item">Packing & Relocation <span class="t-dot"></span></span><span class="t-item">Import / Export <span class="t-dot"></span></span><span class="t-item">Customs Clearance <span class="t-dot"></span></span><span class="t-item">URA Certified <span class="t-dot"></span></span>
+      <span class="t-item">Transportation <span class="t-dot"></span></span><span class="t-item">Ware Housing <span class="t-dot"></span></span><span class="t-item">3PL <span class="t-dot"></span></span><span class="t-item">Air Freight <span class="t-dot"></span></span><span class="t-item">Sea Freight <span class="t-dot"></span></span><span class="t-item">Freight Forwarding <span class="t-dot"></span></span><span class="t-item">Packing & Relocation <span class="t-dot"></span></span><span class="t-item">Import / Export <span class="t-dot"></span></span><span class="t-item">Customs Clearance <span class="t-dot"></span></span><span class="t-item">URA Certified <span class="t-dot"></span></span>
+    </div>
+  </div>
+
   <div class="pg-section pg-about-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start">
     <div class="sr fl pg-about-img-first">
       <img src="https://images.unsplash.com/photo-1570126618953-d437176e8c79?w=700&q=80" alt="Team" style="border-radius:14px;aspect-ratio:4/3">
@@ -562,73 +569,55 @@
 </div>
 
 <!-- ================================================================
-  SERVICES PAGE
-================================================================ -->
-<div class="pg" id="pg-services">
-  <div class="pg-hero"><div class="pg-hero-inner"><div class="sec-label" style="color:rgba(2,31,56,.6)">What We Do</div><h1 class="pg-h">Our Services</h1><p class="pg-sub">Nine end-to-end services. Click any card for full details and to enquire.</p></div></div>
-  <div style="background:var(--sky);padding:72px 0;position:relative;overflow:hidden">
-    <div style="position:absolute;inset:0;background:radial-gradient(ellipse 50% 40% at 10% 50%,rgba(2,31,56,.09),transparent 55%),radial-gradient(ellipse 40% 50% at 90% 30%,rgba(255,255,255,.12),transparent 50%);background-size:200% 200%;animation:bgPan 15s ease-in-out infinite;pointer-events:none"></div>
-    <div style="max-width:1280px;margin:0 auto;padding:0 64px;position:relative;z-index:1">
-      <div class="svc-page-grid">
-        <div class="svc-card sr d1" onclick="openSvc(0)"><div class="svc-card-body"><div class="svc-num">01</div><div class="svc-ico"><img src="assets/images/services/transportation.svg" alt="" class="svc-icon-img"></div><div class="svc-name">Transportation</div><div class="svc-desc">FCL, LCL, Flatbed, Intermodal and Specialty freight for domestic and international clients.</div><div class="svc-cta">Click to Explore →</div></div></div>
-        <div class="svc-card sr d2" onclick="openSvc(1)"><div class="svc-card-body"><div class="svc-num">02</div><div class="svc-ico"><img src="assets/images/services/ware-housing.svg" alt="" class="svc-icon-img"></div><div class="svc-name">Ware Housing</div><div class="svc-desc">State-of-the-art Kampala facility with advanced inventory management for all storage needs.</div><div class="svc-cta">Click to Explore →</div></div></div>
-        <div class="svc-card sr d3" onclick="openSvc(2)"><div class="svc-card-body"><div class="svc-num">03</div><div class="svc-ico"><img src="assets/images/services/3pl.svg" alt="" class="svc-icon-img"></div><div class="svc-name">3PL</div><div class="svc-desc">Third-party logistics optimizing supply chain efficiency from inventory to fulfillment.</div><div class="svc-cta">Click to Explore →</div></div></div>
-        <div class="svc-card sr d1" onclick="openSvc(3)"><div class="svc-card-body"><div class="svc-num">04</div><div class="svc-ico"><img src="assets/images/services/air-freight.svg" alt="" class="svc-icon-img"></div><div class="svc-name">Air Freight</div><div class="svc-desc">Top-tier airfreight for all cargo sizes via our global partner network with advanced tracking.</div><div class="svc-cta">Click to Explore →</div></div></div>
-        <div class="svc-card sr d2" onclick="openSvc(4)"><div class="svc-card-body"><div class="svc-num">05</div><div class="svc-ico"><img src="assets/images/services/sea-freight.svg" alt="" class="svc-icon-img"></div><div class="svc-name">Sea Freight</div><div class="svc-desc">Full container, reefer, bulk, RORO and machinery via Mombasa and Dar es Salaam.</div><div class="svc-cta">Click to Explore →</div></div></div>
-        <div class="svc-card sr d3" onclick="openSvc(5)"><div class="svc-card-body"><div class="svc-num">06</div><div class="svc-ico"><img src="assets/images/services/customer-clearance.svg" alt="" class="svc-icon-img"></div><div class="svc-name">Customs Clearance</div><div class="svc-desc">Fully URA compliant. All documentation and compliance handled — timely and correct.</div><div class="svc-cta">Click to Explore →</div></div></div>
-        <div class="svc-card sr d1" onclick="openSvc(6)"><div class="svc-card-body"><div class="svc-num">07</div><div class="svc-ico"><img src="assets/images/services/freight-forwarding.svg" alt="" class="svc-icon-img"></div><div class="svc-name">Freight Forwarding</div><div class="svc-desc">Global air and ocean freight coordination via strategic partnerships with leading carriers.</div><div class="svc-cta">Click to Explore →</div></div></div>
-        <div class="svc-card sr d2" onclick="openSvc(7)"><div class="svc-card-body"><div class="svc-num">08</div><div class="svc-ico"><img src="assets/images/services/import-export.svg" alt="" class="svc-icon-img"></div><div class="svc-name">Import / Export</div><div class="svc-desc">Documentation, compliance and full logistics management for international cargo movements.</div><div class="svc-cta">Click to Explore →</div></div></div>
-        <div class="svc-card sr d3" onclick="openSvc(8)"><div class="svc-card-body"><div class="svc-num">09</div><div class="svc-ico"><img src="assets/images/services/packing-and-relocating.svg" alt="" class="svc-icon-img"></div><div class="svc-name">Packing & Relocation</div><div class="svc-desc">Stress-free local and international moves. Professional packing, loading, and safe delivery.</div><div class="svc-cta">Click to Explore →</div></div></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ================================================================
   CONTACT PAGE
 ================================================================ -->
 <div class="pg" id="pg-contact">
   <div class="pg-hero" style="min-height:260px"><div class="pg-hero-inner"><div class="sec-label" style="color:rgba(2,31,56,.6)">Get in Touch</div><h1 class="pg-h">Contact Us</h1><p class="pg-sub">Ready to ship? Our team responds within one business day.</p></div></div>
-  <div class="contact-grid" style="max-width:1280px;margin:0 auto;padding:80px 64px;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start">
-    <div class="sr fl">
-      <div class="sec-label">Our Details</div>
-      <h2 class="sec-h" style="margin-bottom:14px">We're Here<br><span class="skyt">For You</span></h2>
-      <div style="margin:22px 0;display:flex;flex-direction:column;gap:3px">
-        <div class="av-cell" style="border-left:none;background:rgba(26,178,232,.08);border-radius:8px;display:flex;gap:14px;align-items:flex-start;padding:16px 18px">
-          <div style="width:40px;height:40px;border-radius:9px;background:var(--sky);display:flex;align-items:center;justify-content:center;flex-shrink:0">
-            <svg style="width:18px;height:18px;stroke:white;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.24 12a19.79 19.79 0 0 1-3.07-8.67 2 2 0 0 1 1.99-2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 9.91"/></svg>
-          </div>
-          <div><div style="font-family:Arial,Helvetica,sans-serif;font-size:.62rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--o);margin-bottom:4px">Call Us On</div><div style="font-family:Arial,Helvetica,sans-serif;font-size:.9rem;font-weight:700;color:var(--navy);line-height:1.55">+256 774 851366 / +256 706 244131</div></div>
-        </div>
-        <div class="av-cell" style="border-left:none;background:rgba(26,178,232,.08);border-radius:8px;display:flex;gap:14px;align-items:flex-start;padding:16px 18px;margin-top:3px">
-          <div style="width:40px;height:40px;border-radius:9px;background:var(--sky);display:flex;align-items:center;justify-content:center;flex-shrink:0">
-            <svg style="width:18px;height:18px;stroke:white;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          </div>
-          <div><div style="font-family:Arial,Helvetica,sans-serif;font-size:.62rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--o);margin-bottom:4px">Email</div><div style="font-family:Arial,Helvetica,sans-serif;font-size:.9rem;font-weight:700;color:var(--navy)">info@abundancelogistics.com</div></div>
-        </div>
-        <div class="av-cell" style="border-left:none;background:rgba(26,178,232,.08);border-radius:8px;display:flex;gap:14px;align-items:flex-start;padding:16px 18px;margin-top:3px">
-          <div style="width:40px;height:40px;border-radius:9px;background:var(--sky);display:flex;align-items:center;justify-content:center;flex-shrink:0">
-            <svg style="width:18px;height:18px;stroke:white;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          </div>
-          <div><div style="font-family:Arial,Helvetica,sans-serif;font-size:.62rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--o);margin-bottom:4px">Location</div><div style="font-family:Arial,Helvetica,sans-serif;font-size:.9rem;font-weight:700;color:var(--navy);line-height:1.55">Plot 1, Kimera Road<br>Ntinda Shopping Center, Suite D14<br>Kampala, Uganda</div></div>
-        </div>
-        <div class="av-cell" style="border-left:none;background:rgba(26,178,232,.08);border-radius:8px;display:flex;gap:14px;align-items:flex-start;padding:16px 18px;margin-top:3px">
-          <div style="width:40px;height:40px;border-radius:9px;background:var(--sky);display:flex;align-items:center;justify-content:center;flex-shrink:0">
-            <svg style="width:18px;height:18px;stroke:white;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          </div>
-          <div><div style="font-family:Arial,Helvetica,sans-serif;font-size:.62rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--o);margin-bottom:4px">Working Hours</div><div style="font-family:Arial,Helvetica,sans-serif;font-size:.9rem;font-weight:700;color:var(--navy)">Monday to Saturday · 08:00 – 17:00 EAT</div></div>
-        </div>
-      </div>
-      <div style="border-radius:12px;overflow:hidden;height:265px;border:2px solid var(--bdr);box-shadow:var(--sh)"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.7507!2d32.6227!3d0.3489!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x177dbc9a06e8c8bd%3A0x6e4c6e09d7e29ed9!2sNtinda%20Shopping%20Center!5e0!3m2!1sen!2sug!4v1710000000000" style="width:100%;height:100%;border:none" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+  <div class="ticker ticker-sm">
+    <div class="t-track">
+      <span class="t-item">Transportation <span class="t-dot"></span></span><span class="t-item">Ware Housing <span class="t-dot"></span></span><span class="t-item">3PL <span class="t-dot"></span></span><span class="t-item">Air Freight <span class="t-dot"></span></span><span class="t-item">Sea Freight <span class="t-dot"></span></span><span class="t-item">Freight Forwarding <span class="t-dot"></span></span><span class="t-item">Packing & Relocation <span class="t-dot"></span></span><span class="t-item">Import / Export <span class="t-dot"></span></span><span class="t-item">Customs Clearance <span class="t-dot"></span></span><span class="t-item">URA Certified <span class="t-dot"></span></span>
+      <span class="t-item">Transportation <span class="t-dot"></span></span><span class="t-item">Ware Housing <span class="t-dot"></span></span><span class="t-item">3PL <span class="t-dot"></span></span><span class="t-item">Air Freight <span class="t-dot"></span></span><span class="t-item">Sea Freight <span class="t-dot"></span></span><span class="t-item">Freight Forwarding <span class="t-dot"></span></span><span class="t-item">Packing & Relocation <span class="t-dot"></span></span><span class="t-item">Import / Export <span class="t-dot"></span></span><span class="t-item">Customs Clearance <span class="t-dot"></span></span><span class="t-item">URA Certified <span class="t-dot"></span></span>
     </div>
-    <div class="sr">
+  </div>
+
+  <!-- CONTACT: info pills strip + map/form grid -->
+  <div class="contact-info-strip sr">
+    <a href="tel:+256774851366" class="ci-pill">
+      <div class="ci-ico"><svg viewBox="0 0 24 24" fill="none"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.27-.27.68-.36 1.02-.24 1.12.37 2.33.57 3.58.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.6 21 3 13.4 3 4c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.58.11.34.03.74-.24 1.02L6.6 10.8z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div><div class="ci-lbl">Call Us</div><div class="ci-val">+256 774 851366 / +256 706 244131</div></div>
+    </a>
+    <a href="mailto:info@abundancelogistics.com" class="ci-pill">
+      <div class="ci-ico"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
+      <div><div class="ci-lbl">Email</div><div class="ci-val">info@abundancelogistics.com</div></div>
+    </a>
+    <div class="ci-pill">
+      <div class="ci-ico"><svg viewBox="0 0 24 24" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="1.8" fill="none"/></svg></div>
+      <div><div class="ci-lbl">Location</div><div class="ci-val">Plot 1, Kimera Rd, Ntinda Shopping Center, D14, Kampala</div></div>
+    </div>
+    <div class="ci-pill">
+      <div class="ci-ico"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.8"/><polyline points="12 6 12 12 16 14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
+      <div><div class="ci-lbl">Hours</div><div class="ci-val">Mon – Sat · 08:00 – 17:00 EAT</div></div>
+    </div>
+  </div>
+
+  <div class="contact-main-grid">
+    <div class="contact-map-col sr fl">
+      <div class="contact-map-wrap">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.7507!2d32.6227!3d0.3489!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x177dbc9a06e8c8bd%3A0x6e4c6e09d7e29ed9!2sNtinda%20Shopping%20Center!5e0!3m2!1sen!2sug!4v1710000000000" style="width:100%;height:100%;border:none" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      <div class="contact-map-caption">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" stroke="var(--sky)" stroke-width="1.8"/><circle cx="12" cy="10" r="3" stroke="var(--sky)" stroke-width="1.8" fill="none"/></svg>
+        <span>Plot 1, Kimera Road, Ntinda Shopping Center, Suite D14, Kampala, Uganda</span>
+      </div>
+    </div>
+    <div class="contact-form-col sr">
       <div class="sec-label">Send a Message</div>
-      <h2 class="sec-h" style="font-size:1.8rem;margin-bottom:14px">Request a<br><span class="skyt">Quote or Enquiry</span></h2>
-      <p style="font-family:Arial,Helvetica,sans-serif;font-size:.9rem;font-weight:500;color:var(--tb);margin-bottom:18px">Fill in your details and we'll respond within one business day.</p>
+      <h2 class="sec-h" style="margin-bottom:6px">Request a Quote<br><span class="skyt">or Enquiry</span></h2>
+      <p class="contact-form-sub">Fill in your details and we'll respond within one business day.</p>
       <form class="cf" onsubmit="submitContact(event)">
         <div class="cf-r"><div class="cf-g"><label class="cf-lbl">Full Name <span>*</span></label><input class="cf-i" type="text" required placeholder="Your full name"></div><div class="cf-g"><label class="cf-lbl">Company</label><input class="cf-i" type="text" placeholder="Company name"></div></div>
         <div class="cf-r"><div class="cf-g"><label class="cf-lbl">Email <span>*</span></label><input class="cf-i" type="email" required placeholder="your@email.com"></div><div class="cf-g"><label class="cf-lbl">Phone</label><input class="cf-i" type="tel" placeholder="+256…"></div></div>
-        <div class="cf-g"><label class="cf-lbl">Service Required <span>*</span></label><select class="cf-s" required><option value="">Select a service…</option><option>Transportation</option><option>Ware Housing</option><option>Sea Freight</option><option>Air Freight</option><option>Freight Forwarding</option><option>Customs Clearance</option><option>Packing & Relocation</option><option>Import / Export</option><option>3PL</option><option>General Enquiry</option></select></div>
+        <div class="cf-g"><label class="cf-lbl">Service Required <span>*</span></label><select class="cf-s" required><option value="">Select a service…</option><option>Transportation</option><option>Ware Housing</option><option>Sea Freight</option><option>Air Freight</option><option>Freight Forwarding</option><option>Customs Clearance</option><option>Packing &amp; Relocation</option><option>Import / Export</option><option>3PL</option><option>General Enquiry</option></select></div>
         <div class="cf-r"><div class="cf-g"><label class="cf-lbl">Origin</label><input class="cf-i" type="text" placeholder="Country / City"></div><div class="cf-g"><label class="cf-lbl">Destination</label><input class="cf-i" type="text" placeholder="Country / City"></div></div>
         <div class="cf-g"><label class="cf-lbl">Message <span>*</span></label><textarea class="cf-ta" required placeholder="Describe your cargo, timeline, or requirements…"></textarea></div>
         <button type="submit" class="btn btn-navy" style="width:100%;justify-content:center;font-size:.92rem;padding:15px"><span>Send Message</span><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
@@ -693,7 +682,7 @@
         <ul class="fc-links">
           <li><span class="fc-link" onclick="gp('home')">Home</span></li>
           <li><span class="fc-link" onclick="gp('about')">About Us</span></li>
-          <li><span class="fc-link" onclick="gp('services')">Services</span></li>
+          <li><span class="fc-link" onclick="gp('home');setTimeout(()=>document.getElementById('svc-sec').scrollIntoView({behavior:'smooth'}),120)">Services</span></li>
           <li><span class="fc-link" onclick="gp('home');scrollToTeam()">Our Team</span></li>
           <li><span class="fc-link" onclick="gp('contact')">Contact Us</span></li>
         </ul>
@@ -701,7 +690,7 @@
       <div>
         <div class="fc-t">Services</div>
         <ul class="fc-links">
-          <li><span class="fc-link" onclick="openSvc(0)">Transportation</span></li>
+          <li><span class="fc-link" onclick="gp('home');setTimeout(()=>{document.getElementById('svc-sec').scrollIntoView({behavior:'smooth'});setTimeout(()=>openSvc(0),400)},120)">Transportation</span></li>
           <li><span class="fc-link" onclick="openSvc(1)">Ware Housing</span></li>
           <li><span class="fc-link" onclick="openSvc(4)">Sea Freight</span></li>
           <li><span class="fc-link" onclick="openSvc(3)">Air Freight</span></li>
